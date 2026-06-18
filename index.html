@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开云 · 信息索引与资料整理平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            color: #1e1e1e;
+            line-height: 1.6;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: #0b1a2e;
+            background-image: radial-gradient(circle at 20% 30%, #1c3e5e, #08131f);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: #e8edf2;
+            border-bottom: 3px solid #3c7a9b;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            max-width: 640px;
+            margin: 0 auto 1.2rem;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #c7d9e8;
+        }
+
+        /* 浅色正文区 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 1.8rem 3.5rem;
+        }
+
+        /* 卡片区：摘要、亮点等 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+        }
+
+        .card h3 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: #1e2f3f;
+            border-left: 4px solid #3c7a9b;
+            padding-left: 0.75rem;
+        }
+
+        .card p {
+            font-size: 0.98rem;
+            color: #3a434c;
+            margin-bottom: 0.5rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 0.4rem 0;
+            font-size: 0.97rem;
+            position: relative;
+            padding-left: 1.4rem;
+        }
+
+        .card li::before {
+            content: "·";
+            color: #3c7a9b;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* 使用建议 + 场景 */
+        .advice-section {
+            background: white;
+            border-radius: 18px;
+            padding: 2rem 2rem;
+            margin: 2.2rem 0;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+        }
+
+        .advice-section h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #0b1a2e;
+            margin-bottom: 0.8rem;
+        }
+
+        .advice-section p {
+            margin-bottom: 0.9rem;
+        }
+
+        .advice-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .advice-item {
+            flex: 1 1 200px;
+            background: #f0f3f7;
+            padding: 1.2rem 1.2rem;
+            border-radius: 14px;
+        }
+
+        .advice-item strong {
+            display: block;
+            font-weight: 600;
+            color: #1b3a4f;
+            margin-bottom: 0.2rem;
+        }
+
+        .advice-item span {
+            font-size: 0.94rem;
+            color: #2f3e4b;
+        }
+
+        /* FAQ 摘要 */
+        .faq-box {
+            background: #eef2f6;
+            border-radius: 18px;
+            padding: 1.8rem 2rem;
+            margin: 2rem 0 1.5rem;
+            border-left: 4px solid #6f9eb3;
+        }
+
+        .faq-box h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #0e232f;
+            margin-bottom: 0.8rem;
+        }
+
+        .faq-item {
+            margin: 1rem 0;
+        }
+
+        .faq-item .q {
+            font-weight: 500;
+            color: #1d3e53;
+        }
+
+        .faq-item .a {
+            color: #2b3e4c;
+            margin-top: 0.1rem;
+        }
+
+        /* 链接强调色 */
+        a {
+            color: #1f6793;
+            text-decoration: underline;
+            text-decoration-color: #9bbfd2;
+            text-underline-offset: 3px;
+            font-weight: 500;
+            transition: color 0.15s, text-decoration-color 0.15s;
+        }
+
+        a:hover {
+            color: #0b3f5c;
+            text-decoration-color: #1f6793;
+        }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5c6977;
+            border-top: 1px solid #d7dee6;
+            padding-top: 2rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 680px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.4rem;
+            }
+
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+
+            .advice-section {
+                padding: 1.5rem;
+            }
+
+            .faq-box {
+                padding: 1.4rem;
+            }
+        }
+
+        @media (max-width: 460px) {
+            .hero {
+                padding: 2.5rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .hero .sub {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <h1>整理 · 索引 · 开云</h1>
+    <p class="sub">一个围绕资料梳理与信息聚合构建的轻量平台，从碎片中提取结构，让查找回归简单。</p>
+    <span class="tagline">基于索引的内容组织方式</span>
+</section>
+
+<div class="container">
+
+    <!-- 摘要卡片 + 亮点 -->
+    <div class="card-grid">
+        <div class="card">
+            <h3>摘要速览</h3>
+            <p><strong>开云</strong> 是一套偏向资料整理与信息索引的工具型页面。不同于传统门户或资源站，它更关注内容的可发现性与归类逻辑，帮助使用者在日常浏览中快速定位自己需要的素材、笔记或链接集合。</p>
+            <p style="margin-top:0.6rem;">整体设计轻巧，没有繁杂的推荐流，而是把选择权交还给使用者。</p>
+        </div>
+        <div class="card">
+            <h3>几个特点</h3>
+            <ul>
+                <li>按主题归类，而非简单的时间排序</li>
+                <li>索引层级清晰，减少无效跳转</li>
+                <li>页面结构偏向参考与实用，弱化社交元素</li>
+                <li>内容呈现克制，不堆叠信息</li>
+                <li>适配移动端，日常查阅顺手</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 使用建议 + 场景 -->
+    <div class="advice-section">
+        <h2>使用建议与实际场景</h2>
+        <p>你可以将 <strong>开云</strong> 视为一个自己或团队的内容索引面板。它不是要替代笔记软件或书签管理，而是提供一个更直观的入口来归拢那些反复查阅的资料。比如：</p>
+        <div class="advice-grid">
+            <div class="advice-item">
+                <strong>日常收集</strong>
+                <span>把零散的网页、文档、参考链接按项目或主题集中，不必每次重新搜索。</span>
+            </div>
+            <div class="advice-item">
+                <strong>学习笔记</strong>
+                <span>将不同阶段整理的笔记或资料卡片分类排放，复习时顺着索引就能找到上下文。</span>
+            </div>
+            <div class="advice-item">
+                <strong>团队共享</strong>
+                <small style="display:block; color:#4b5b68;">（非强制功能）</small>
+                <span>如果团队成员都使用同一索引，可以减少信息不同步的麻烦。</span>
+            </div>
+        </div>
+        <p style="margin-top:1.2rem;">当然，它也可以只是一个你个人的信息锚点——把最常用的几个方向放在首页，剩下的交给浏览和发现。</p>
+    </div>
+
+    <!-- FAQ 摘要 + 可信但克制的说明 -->
+    <div class="faq-box">
+        <h3>常见疑问 · 简短说明</h3>
+        <div class="faq-item">
+            <div class="q">❓ 开云需要注册或登录吗？</div>
+            <div class="a">取决于你使用的具体索引版本。部分部署纯粹的静态索引无需身份验证，可直接浏览。若涉及编辑或私有分组，可能会有简单的访问控制。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">❓ 内容会更新频繁吗？</div>
+            <div class="a">索引内容由维护者决定。通常按需更新，没有固定频率，也不会推送大量通知。你可以在方便的时候自行查阅。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">❓ 资料索引有保障吗？</div>
+            <div class="a">索引本身是参考资料聚合，不替代原始来源。部分链接指向外部站点，请根据自身判断使用。我们不夸大也不承诺永久有效，但会尽量维持链接的可用性。</div>
+        </div>
+    </div>
+
+    <!-- 自然嵌入链接的句子：只出现 "开云" 作为可见文本 -->
+    <p style="font-size:1.05rem; margin:1.2rem 0 0.8rem;">
+        如果你对这样的资料整理方式感兴趣，可以试试 <a href="https://app-kaiyun-entry.com.cn">开云</a>，从首页开始了解它的索引结构。
+    </p>
+    <p style="color: #3b4b5a;">
+        无论是简单浏览还是深度使用，都建议先花几分钟看看分类逻辑，这样后续查阅会更顺手。
+    </p>
+
+    <div class="footer-note">
+        <p>基于资料索引与整理方向 · 保持克制与实用</p>
+        <p style="margin-top:0.4rem;">&copy; 2025 · 页面内容仅供参考，具体以实际平台为准</p>
+    </div>
+
+</div>
+
+</body>
+</html>
